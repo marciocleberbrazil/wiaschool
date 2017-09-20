@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WIADBModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="WIADBEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+    <EntitySet Name="Courses" EntityType="WIADBModel.Cours" />
+    <EntitySet Name="Schools" EntityType="WIADBModel.School" />
+    <EntitySet Name="Students" EntityType="WIADBModel.Student" />
+    <AssociationSet Name="FK_Students_Schools" Association="WIADBModel.FK_Students_Schools">
+      <End Role="Schools" EntitySet="Schools" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="School_has_Courses" Association="WIADBModel.School_has_Courses">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="Schools" EntitySet="Schools" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Cours">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Name" Type="String" MaxLength="60" Unicode="true" FixedLength="false" />
+    <Property Name="Created" Type="DateTime" />
+    <Property Name="Updated" Type="DateTime" />
+    <Property Name="Allowed" Type="Boolean" />
+    <NavigationProperty Name="Schools" Relationship="WIADBModel.School_has_Courses" FromRole="Courses" ToRole="Schools" />
+  </EntityType>
+  <EntityType Name="School">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="Name" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="Address" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="Address2" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="City" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="State" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="Created" Type="DateTime" />
+    <Property Name="Updated" Type="DateTime" />
+    <Property Name="Allowed" Type="Boolean" />
+    <NavigationProperty Name="Students" Relationship="WIADBModel.FK_Students_Schools" FromRole="Schools" ToRole="Students" />
+    <NavigationProperty Name="Courses" Relationship="WIADBModel.School_has_Courses" FromRole="Schools" ToRole="Courses" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+    <Property Name="FirstName" Type="String" MaxLength="60" Unicode="true" FixedLength="false" />
+    <Property Name="LastName" Type="String" MaxLength="60" Unicode="true" FixedLength="false" />
+    <Property Name="Created" Type="DateTime" />
+    <Property Name="Updated" Type="DateTime" />
+    <Property Name="SchoolId" Type="Int32" />
+    <NavigationProperty Name="School" Relationship="WIADBModel.FK_Students_Schools" FromRole="Students" ToRole="Schools" />
+    <Property Type="Boolean" Name="Allowed" />
+  </EntityType>
+  <Association Name="FK_Students_Schools">
+    <End Role="Schools" Type="WIADBModel.School" Multiplicity="0..1" />
+    <End Role="Students" Type="WIADBModel.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Schools">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="SchoolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="School_has_Courses">
+    <End Role="Courses" Type="WIADBModel.Cours" Multiplicity="*" />
+    <End Role="Schools" Type="WIADBModel.School" Multiplicity="*" />
+  </Association>
+</Schema>

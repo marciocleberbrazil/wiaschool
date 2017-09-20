@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WIADBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="WIADBModelStoreContainer">
+    <EntitySet Name="Courses" EntityType="WIADBModel.Store.Courses" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Schools" EntityType="WIADBModel.Store.Schools" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="Students" EntityType="WIADBModel.Store.Students" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <EntitySet Name="School_has_Courses" EntityType="WIADBModel.Store.School_has_Courses" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+    <AssociationSet Name="FK_Students_Schools" Association="WIADBModel.Store.FK_Students_Schools">
+      <End Role="Schools" EntitySet="Schools" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_School_has_Courses_Courses" Association="WIADBModel.Store.FK_School_has_Courses_Courses">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="School_has_Courses" EntitySet="School_has_Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_School_has_Courses_Schools" Association="WIADBModel.Store.FK_School_has_Courses_Schools">
+      <End Role="Schools" EntitySet="Schools" />
+      <End Role="School_has_Courses" EntitySet="School_has_Courses" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Courses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="Created" Type="datetime" Nullable="true" />
+    <Property Name="Updated" Type="datetime" Nullable="true" />
+    <Property Name="Allowed" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Schools">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="150" />
+    <Property Name="Address" Type="nvarchar" Nullable="true" MaxLength="200" />
+    <Property Name="Address2" Type="nvarchar" Nullable="true" MaxLength="150" />
+    <Property Name="City" Type="nvarchar" Nullable="true" MaxLength="150" />
+    <Property Name="State" Type="nvarchar" Nullable="true" MaxLength="5" />
+    <Property Name="Created" Type="datetime" Nullable="true" />
+    <Property Name="Updated" Type="datetime" Nullable="true" />
+    <Property Name="Allowed" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="LastName" Type="nvarchar" Nullable="true" MaxLength="60" />
+    <Property Name="Created" Type="datetime" Nullable="true" />
+    <Property Name="Updated" Type="datetime" Nullable="true" />
+    <Property Name="SchoolId" Type="int" Nullable="true" />
+    <Property Name="Allowed" Type="bit" Nullable="true" />
+  </EntityType>
+  <EntityType Name="School_has_Courses">
+    <Key>
+      <PropertyRef Name="Courses_Id" />
+      <PropertyRef Name="Schools_Id" />
+    </Key>
+    <Property Name="Courses_Id" Type="int" Nullable="false" />
+    <Property Name="Schools_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Students_Schools">
+    <End Role="Schools" Type="WIADBModel.Store.Schools" Multiplicity="0..1" />
+    <End Role="Students" Type="WIADBModel.Store.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Schools">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="SchoolId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_School_has_Courses_Courses">
+    <End Role="Courses" Type="WIADBModel.Store.Courses" Multiplicity="1" />
+    <End Role="School_has_Courses" Type="WIADBModel.Store.School_has_Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="School_has_Courses">
+        <PropertyRef Name="Courses_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_School_has_Courses_Schools">
+    <End Role="School_has_Courses" Type="WIADBModel.Store.School_has_Courses" Multiplicity="*" />
+    <End Role="Schools" Type="WIADBModel.Store.Schools" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Schools">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="School_has_Courses">
+        <PropertyRef Name="Schools_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

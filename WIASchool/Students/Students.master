@@ -1,0 +1,11 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Students.master.cs" Inherits="WIASchool.Students.Students" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<h1>Students</h1>
+<nav>
+    <a href="Default.aspx">List of Students</a>
+    <a href="Create.aspx">New Students</a>
+</nav>
+<asp:ContentPlaceHolder ID="MainContent2" runat="server"/>
+</asp:Content>

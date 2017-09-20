@@ -1,0 +1,15 @@
+C:\Users\2456\Downloads\WIASchool\WIASchool\bin\WIASchool.dll
+C:\Users\2456\Downloads\WIASchool\WIASchool\bin\WIASchool.pdb
+C:\Users\2456\Downloads\WIASchool\WIASchool\obj\Debug\WIASchool.dll
+C:\Users\2456\Downloads\WIASchool\WIASchool\obj\Debug\WIASchool.pdb
+C:\Users\2456\Downloads\WIASchool\WIASchool\obj\Debug\WIASchool.csprojResolveAssemblyReference.cache
+D:\Downloads\WIASchool\WIASchool\WIASchool\bin\WIASchool.dll.config
+D:\Downloads\WIASchool\WIASchool\WIASchool\bin\WIASchool.dll
+D:\Downloads\WIASchool\WIASchool\WIASchool\bin\WIASchool.pdb
+D:\Downloads\WIASchool\WIASchool\WIASchool\obj\Debug\WIASchool.csprojResolveAssemblyReference.cache
+D:\Downloads\WIASchool\WIASchool\WIASchool\obj\Debug\WIASchool.dll
+D:\Downloads\WIASchool\WIASchool\WIASchool\obj\Debug\WIASchool.pdb
+D:\Downloads\WIASchool\WIASchool\WIASchool\bin\EntityFramework.dll
+D:\Downloads\WIASchool\WIASchool\WIASchool\bin\EntityFramework.SqlServer.dll
+D:\Downloads\WIASchool\WIASchool\WIASchool\bin\EntityFramework.xml
+D:\Downloads\WIASchool\WIASchool\WIASchool\bin\EntityFramework.SqlServer.xml
